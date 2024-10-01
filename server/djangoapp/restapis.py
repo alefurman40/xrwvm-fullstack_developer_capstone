@@ -14,14 +14,13 @@ sentiment_analyzer_url = os.getenv(
 # def get_request(endpoint, **kwargs):
 # Add code for get requests to back end
 
-
 def get_request(endpoint, **kwargs):
     params = ""
-    if(kwargs):
-        for key,value in kwargs.items():
-            params=params + key + "=" + value + "&"
+    if kwargs:
+        for key, value in kwargs.items():
+            params = params + key + "=" + value + "&"
 
-    request_url = backend_url+endpoint + "?" + params
+    request_url = backend_url + endpoint + "?" + params
 
     print("GET from {} ".format(request_url))
     try:
@@ -31,7 +30,7 @@ def get_request(endpoint, **kwargs):
         response = requests.get(request_url)
         print(response)
         return response.json()
-    except Exception as e: 
+    except Exception as e:
         print(e)
         # If any error occurs
         # print("Network exception occurred")
