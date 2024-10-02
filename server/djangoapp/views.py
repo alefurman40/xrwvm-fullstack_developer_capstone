@@ -34,7 +34,8 @@ def get_cars(request):
         cars.append(
             {"CarModel": car_model.name, "CarMake": car_model.car_make.name}
             )
-    return JsonResponse({"CarModels":cars})
+    return JsonResponse({"CarModels": cars})
+
 
 # Create a `login_request` view to handle sign in request
 @csrf_exempt
@@ -51,6 +52,7 @@ def login_user(request):
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
     return JsonResponse(data)
+
 
 # Create a `logout_request` view to handle sign out request
 @csrf_exempt
