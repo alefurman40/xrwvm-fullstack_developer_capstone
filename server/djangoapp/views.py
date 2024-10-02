@@ -68,7 +68,7 @@ def logout_request(request):
 
 @csrf_exempt
 def registration(request):
-    context = {}
+    # context = {}
 
     data = json.loads(request.body)
     username = data['userName']
@@ -82,7 +82,7 @@ def registration(request):
         # Check if user already exists
         User.objects.get(username=username)
         username_exist = True
-    except:
+    except Exception as e:
         # If not, simply log this is a new user
         logger.debug("{} is new user".format(username))
 
@@ -90,7 +90,12 @@ def registration(request):
     if not username_exist:
         # Create user in auth_user table
         user = User.objects.create_user(
-            username=username, first_name=first_name, last_name=last_name,password=password, email=email)
+            username=username, 
+            first_name=first_name, 
+            last_name=last_name, 
+            password=password, 
+            email=email
+        )
         # Login the user and redirect to list page
         login(request, user)
         data = {"userName": username,"status": "Authenticated"}

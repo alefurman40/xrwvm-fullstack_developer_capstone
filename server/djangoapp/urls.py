@@ -33,7 +33,7 @@ urlpatterns = [
     ),
 
     path(route='add_review', view=views.add_review, name='add_review'),
-   
+
     # path for dealer reviews view
 
     # path for add a review view
