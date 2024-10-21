@@ -117,8 +117,10 @@ def registration(request):
 # def get_dealerships(request):
 # ...
 
-# Update the `get_dealerships` render list of dealerships all by default, 
+# Update the `get_dealerships` render list of dealerships all by default,
 # particular state if state is passed
+
+
 def get_dealerships(request, state="All"):
     if (state == "All"):
         endpoint = "/fetchDealers"
@@ -136,6 +138,7 @@ def get_dealerships(request, state="All"):
 # def get_dealer_details(request, dealer_id):
 # ...
 
+
 def get_dealer_details(request, dealer_id):
     if (dealer_id):
         endpoint = "/fetchDealer/"+str(dealer_id)
@@ -147,6 +150,7 @@ def get_dealer_details(request, dealer_id):
 # Create a `add_review` view to submit a review
 # def add_review(request):
 # ...
+
 
 def get_dealer_reviews(request, dealer_id):
     # if dealer id has been provided
