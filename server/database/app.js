@@ -1,22 +1,22 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const fs = require('fs');
-const  cors = require('cors')
-const app = express()
-const port = 3030;
+var express = require('express');
+var mongoose = require('mongoose');
+var fs = require('fs');
+var  cors = require('cors');
+var app = express();
+var port = 3030;
 
-app.use(cors())
+app.use(cors());
 app.use(require('body-parser').urlencoded({ extended: false }));
 
-const reviews_data = JSON.parse(fs.readFileSync("reviews.json", 'utf8'));
-const dealerships_data = JSON.parse(fs.readFileSync("dealerships.json", 'utf8'));
+var reviews_data = JSON.parse(fs.readFileSync("reviews.json", 'utf8'));
+var dealerships_data = JSON.parse(fs.readFileSync("dealerships.json", 'utf8'));
 
 mongoose.connect("mongodb://mongo_db:27017/",{'dbName':'dealershipsDB'});
 
 
-const Reviews = require('./review');
+var Reviews = require('./review');
 
-const Dealerships = require('./dealership');
+var Dealerships = require('./dealership');
 
 try {
   Reviews.deleteMany({}).then(()=>{
@@ -39,7 +39,7 @@ app.get('/', async (req, res) => {
 // Express route to fetch all reviews
 app.get('/fetchReviews', async (req, res) => {
   try {
-    const documents = await Reviews.find();
+    var documents = await Reviews.find();
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching documents' });
@@ -49,7 +49,7 @@ app.get('/fetchReviews', async (req, res) => {
 // Express route to fetch reviews by a particular dealer
 app.get('/fetchReviews/dealer/:id', async (req, res) => {
   try {
-    const documents = await Reviews.find({dealership: req.params.id});
+    var documents = await Reviews.find({dealership: req.params.id});
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching documents' });
@@ -60,7 +60,7 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
 app.get('/fetchDealers', async (req, res) => {
 //Write your code here
 try {
-    const documents = await Dealerships.find();
+    var documents = await Dealerships.find();
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching documents' });
@@ -71,7 +71,7 @@ try {
 app.get('/fetchDealers/:state', async (req, res) => {
 //Write your code here
 try {
-    const documents = await Dealerships.find({state: req.params.state});
+    var documents = await Dealerships.find({state: req.params.state});
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching documents' });
@@ -82,7 +82,7 @@ try {
 app.get('/fetchDealer/:id', async (req, res) => {
 //Write your code here
 try {
-    const documents = await Dealerships.find({id: req.params.id});
+    var documents = await Dealerships.find({id: req.params.id});
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching documents' });
@@ -92,10 +92,10 @@ try {
 //Express route to insert review
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   data = JSON.parse(req.body);
-  const documents = await Reviews.find().sort( { id: -1 } )
+  var documents = await Reviews.find().sort( { id: -1 } )
   let new_id = documents[0]['id']+1
 
-  const review = new Reviews({
+  var review = new Reviews({
 		"id": new_id,
 		"name": data['name'],
 		"dealership": data['dealership'],
@@ -108,7 +108,7 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
 	});
 
   try {
-    const savedReview = await review.save();
+    var savedReview = await review.save();
     res.json(savedReview);
   } catch (error) {
 		console.log(error);
