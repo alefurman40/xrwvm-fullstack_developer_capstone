@@ -1,4 +1,4 @@
-/*
+
 var express = require('express');
 var mongoose = require('mongoose');
 var fs = require('fs');
@@ -93,7 +93,7 @@ try {
 });
 
 //Express route to insert review
-app.post('/insert_review', express.raw({ type: '' }), async (req, res) => {
+app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   data = JSON.parse(req.body);
   var documents = await Reviews.find().sort( { id: -1 } );
   var new_id = documents[0]['id']+1;
@@ -124,4 +124,4 @@ app.listen(port, function() {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
-*/
+
