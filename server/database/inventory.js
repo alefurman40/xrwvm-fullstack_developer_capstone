@@ -1,3 +1,4 @@
+/*
 var { Int32 } = require('mongodb');
 var mongoose = require('mongoose');
 
@@ -31,3 +32,4 @@ mileage: {
 });
 
 module.exports = mongoose.model('cars', cars);
+*/
