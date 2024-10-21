@@ -19,16 +19,17 @@ var Reviews = require('./review');
 var Dealerships = require('./dealership');
 
 try {
-  Reviews.deleteMany({}).then(()=>{
-    Reviews.insertMany(reviews_data['reviews']);
-  });
-  Dealerships.deleteMany({}).then(()=>{
-    Dealerships.insertMany(dealerships_data['dealerships']);
-  });
+    Reviews.deleteMany({}).then(()=>{
+      Reviews.insertMany(reviews_data['reviews']);
+    });
+    Dealerships.deleteMany({}).then(()=>{
+      Dealerships.insertMany(dealerships_data['dealerships']);
+    });
+    
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching documents' });
+  }
   
-} catch (error) {
-  res.status(500).json({ error: 'Error fetching documents' });
-}
 
 
 // Express route to home
@@ -117,6 +118,6 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
 });
 
 // Start the Express server
-app.listen(port, () => {
+app.listen(port, function() {
   console.log(`Server is running on http://localhost:${port}`);
 });
